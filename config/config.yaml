@@ -1,0 +1,31 @@
+# AIOps configuration. Every key is optional - built-in defaults apply for anything omitted.
+
+detection:
+  window: 1min             # size of each analysis window
+  error_threshold: 5       # ERROR+CRITICAL in one window that always counts as anomalous
+  contamination: auto      # Isolation Forest outlier share ("auto" or a fraction like 0.05)
+  random_state: 42         # keeps results reproducible
+  ml_min_bad: 2            # ML flags need at least this many errors to count
+  max_gap_windows: 1       # merge anomalous windows separated by <= this many quiet windows
+  context_windows: 2       # look this many windows before an incident for the first signal
+  novelty_baseline_max: 2  # a message is "new" if seen <= this often outside incidents
+  novelty_min_count: 2     # ...and it repeats at least this often inside the incident
+
+metrics:
+  cpu_threshold: 85
+  mem_threshold: 90
+  disk_threshold: 90
+  forecast_horizon: 3      # samples ahead to forecast
+
+remediation:
+  dry_run: true            # keep true until you have reviewed the rules below
+  rules:                   # regex matched against the root cause and top messages
+    - pattern: "Database connection"
+      action: restart_service
+      params: { service: postgresql }
+    - pattern: "Disk (usage|write failure)"
+      action: vacuum_journal
+      params: { max_size: 200M }
+    - pattern: "payment"
+      action: scale_deployment
+      params: { deployment: payment-api, replicas: 5 }
