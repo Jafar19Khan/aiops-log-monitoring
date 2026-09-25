@@ -29,7 +29,7 @@ class Forecast:
 def predict_breach(
     history: Sequence[float], threshold: float, horizon: int = 3, min_points: int = 5
 ) -> Forecast:
-        """Fit a straight line to ``history`` and check if it crosses ``threshold`` within ``horizon``.
+    """Fit a straight line to ``history`` and check if it crosses ``threshold`` within ``horizon``.
 
     A breach is only predicted for a *rising* trend; a value that is already high but flat
     is a current-threshold problem, not a forecast.
