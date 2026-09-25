@@ -40,7 +40,8 @@ def format_text(result: AnalysisResult) -> str:
     for inc in result.incidents:
         lines += [
             "",
-            f"Incident #{inc.id} [{inc.severity}]  {inc.start:%Y-%m-%d %H:%M:%S} -> {inc.end:%H:%M:%S}",
+            f"Incident #{inc.id} [{inc.severity}]  "
+            f"{inc.start:%Y-%m-%d %H:%M:%S} -> {inc.end:%H:%M:%S}",
             f"  events          : {inc.critical_count} critical, {inc.error_count} error, "
             f"{inc.warning_count} warning",
             f"  root cause hint : {inc.root_cause}",

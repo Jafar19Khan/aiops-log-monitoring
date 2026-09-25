@@ -24,7 +24,9 @@ class AnalysisResult:
     incidents: list[Incident]
 
 
-def analyze_parsed(parsed: ParseResult, config: dict[str, Any], log_file: str = "<memory>") -> AnalysisResult:
+def analyze_parsed(
+    parsed: ParseResult, config: dict[str, Any], log_file: str = "<memory>"
+) -> AnalysisResult:
     cfg = DetectionConfig.from_dict(config["detection"])
     features = build_window_features(parsed.frame, cfg.window)
     windows = detect_anomalous_windows(features, cfg)
