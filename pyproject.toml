@@ -28,3 +28,9 @@ where = ["src"]
 
 [tool.ruff]
 line-length = 100
+
+[tool.ruff.lint]
+# DTZ001/DTZ007: log timestamps in this project are intentionally naive (no timezone in the
+# "YYYY-MM-DD HH:MM:SS" log format), so timezone-aware datetime rules don't apply here.
+# TRY004: we deliberately raise ValueError (not TypeError) for bad config, and tests assert on it.
+ignore = ["DTZ001", "DTZ007", "TRY004"]

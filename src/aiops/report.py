@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 from aiops.pipeline import AnalysisResult
 from aiops.remediation import ActionResult
@@ -40,10 +40,14 @@ def format_text(result: AnalysisResult) -> str:
     for inc in result.incidents:
         lines += [
             "",
-            f"Incident #{inc.id} [{inc.severity}]  "
-            f"{inc.start:%Y-%m-%d %H:%M:%S} -> {inc.end:%H:%M:%S}",
-            f"  events          : {inc.critical_count} critical, {inc.error_count} error, "
-            f"{inc.warning_count} warning",
+            (
+                f"Incident #{inc.id} [{inc.severity}]  "
+                f"{inc.start:%Y-%m-%d %H:%M:%S} -> {inc.end:%H:%M:%S}"
+            ),
+            (
+                f"  events          : {inc.critical_count} critical, {inc.error_count} error, "
+                f"{inc.warning_count} warning"
+            ),
             f"  root cause hint : {inc.root_cause}",
         ]
         if inc.first_signal_time is not None:

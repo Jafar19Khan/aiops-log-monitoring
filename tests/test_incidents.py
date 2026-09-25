@@ -1,10 +1,10 @@
 import unittest
+from datetime import datetime
 
 from aiops.config import load_config
-from aiops.pipeline import analyze_parsed
 from aiops.parser import parse_lines
+from aiops.pipeline import analyze_parsed
 from aiops.simulate import generate_logs
-from datetime import datetime
 
 
 class TestIncidentsOnSimulatedLogs(unittest.TestCase):

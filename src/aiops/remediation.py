@@ -12,8 +12,9 @@ import logging
 import re
 import shlex
 import subprocess
+from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import Any, Iterable
+from typing import Any
 
 logger = logging.getLogger(__name__)
 

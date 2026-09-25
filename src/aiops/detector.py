@@ -25,7 +25,7 @@ class DetectionConfig:
     min_windows_for_ml: int = 10      # too little history -> rely on the rule only
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "DetectionConfig":
+    def from_dict(cls, data: dict[str, Any]) -> DetectionConfig:
         known = {f.name for f in fields(cls)}
         unknown = set(data) - known
         if unknown:
